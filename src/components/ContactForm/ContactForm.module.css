@@ -1,0 +1,28 @@
+.contact{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 500px;
+    justify-content: center;
+    border: 1px solid;
+    margin-left: 10px;
+    gap: 15px;
+ 
+}
+
+.contact button {
+    height: 30px;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.contact input {
+    width:  300px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.contact h3 {
+    margin-left: 10px;
+    margin-bottom: -20px;
+}
