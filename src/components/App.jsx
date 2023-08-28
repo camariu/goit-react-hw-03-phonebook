@@ -5,32 +5,18 @@ import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
- 
-  useEffect(() => {
-    const storedData = localStorage.getItem('storedData');
-    if (storedData) {
-       try{
-        setContacts(JSON.parse(storedData));
-       }  catch (error){
-        console.log('Error:', error)
-       }
-    }
-  }, []);
+  const [contacts, setContacts] = useState();
 
   useEffect(() => {
-
-    if(contacts){
-      localStorage.setItem('storedData', JSON.stringify(contacts))
-    }
+    if (contacts)
+      localStorage.setItem('stoargedData', JSON.stringify(contacts));
   }, [contacts]);
 
-  
+  useEffect(() => {
+    const storagedData = JSON.parse(localStorage.getItem('stoargedData'));
+    setContacts(storagedData);
+  }, []);
+
   const [filter, setFilter] = useState('');
 
   const addContacts = (name, number) => {
@@ -42,7 +28,7 @@ export const App = () => {
     setFilter(value);
   };
 
-  const filteredContacts = contacts.filter(contact =>
+  const filteredContacts = contacts?.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
