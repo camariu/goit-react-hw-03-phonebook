@@ -5,23 +5,26 @@ import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 
 export const App = () => {
-  const [contacts, setContacts] = useState();
-
-  useEffect(() => {
-    if (contacts)
-      localStorage.setItem('stoargedData', JSON.stringify(contacts));
-  }, [contacts]);
+  const [contacts, setContacts] = useState( );
 
   useEffect(() => {
     const storagedData = JSON.parse(localStorage.getItem('stoargedData'));
     setContacts(storagedData);
   }, []);
 
+  useEffect(() => {
+    if (contacts)
+      localStorage.setItem('stoargedData', JSON.stringify(contacts));
+    
+  }, [contacts]);
+
+ 
+
   const [filter, setFilter] = useState('');
 
   const addContacts = (name, number) => {
     const newContact = { id: nanoid(), name, number };
-    setContacts([...contacts, newContact]);
+    setContacts((prev) => [...prev, newContact]);
   };
 
   const handeleFilterChange = value => {
@@ -33,7 +36,7 @@ export const App = () => {
   );
 
   const handleDeleteContact = id => {
-    const updatedContacts = contacts.filter(contact => contact.id !== id);
+    const updatedContacts = contacts?.filter(contact => contact.id !== id);
     setContacts(updatedContacts);
   };
 
